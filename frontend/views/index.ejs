@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <% include ./navbar.ejs %>
+
+    <!--Home Content-->
+    <main>
+        <div class="search-container">
+            <input type="text" placeholder="Leihartikel suchen">
+            <button class="filter-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="white" class="bi bi-filter-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M3.5 5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1M5 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+                  </svg>
+            </button>
+        </div>
+        
+        <div class="slider-container">
+            <button id="prev-btn" class="slider-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#976268" class="bi bi-caret-left" viewBox="0 0 16 16">
+                    <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753"/>
+                </svg>
+            </button>
+    
+            <div class="product-display">
+                <div id="product-slider" class="product-slider">
+                    <!-- Produkte werden dann im js verarbeitet -->
+                </div>
+            </div>
+    
+            <button id="next-btn" class="slider-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#976268" class="bi bi-caret-right" viewBox="0 0 16 16">
+                    <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753"/>
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <% include ./footer.ejs %> 
+
+    <script>
+        // Produkte erstmal Platzhalter
+        const products = [
+            { id: 1, image: 'image1.jpg', title: 'Product 1' },
+            { id: 2, image: 'image2.jpg', title: 'Product 2' },
+            { id: 3, image: 'image3.jpg', title: 'Product 3' },
+            { id: 4, image: 'image4.jpg', title: 'Product 4' },
+            { id: 5, image: 'image5.jpg', title: 'Product 5' }
+        ];
+    
+        const productSlider = document.getElementById('product-slider');
+        let currentIndex = 0;
+    
+        function populateSlider() {
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <div class="product-image" style="background-image: url('${product.image}')"></div>
+                    <button class="borrow-btn">Ausleihen</button>
+                `;
+                productSlider.appendChild(productCard);
+            });
+        }
+    
+        function moveSlider(direction) {
+            const totalProducts = products.length;
+            const visibleProducts = Math.floor(productSlider.parentElement.offsetWidth / productSlider.firstElementChild.offsetWidth);
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % totalProducts;
+            } else if (direction === 'prev') {
+                currentIndex = (currentIndex - 1 + totalProducts) % totalProducts;
+            }
+            const translateX = -currentIndex * (100 / visibleProducts);
+            productSlider.style.transform = `translateX(${translateX}%)`;
+        }
+    
+        document.getElementById('next-btn').addEventListener('click', () => moveSlider('next'));
+        document.getElementById('prev-btn').addEventListener('click', () => moveSlider('prev'));
+ 
+        populateSlider();
+    </script>
+</body>
+</html>
