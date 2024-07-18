@@ -14,8 +14,6 @@ body {
   margin-left: 90px; 
 }
 
-
-
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -67,7 +65,6 @@ body {
   display: flex;
   justify-content: flex-start; 
 }
-
 
 /*Footer*/
 .footer-logo-img {
