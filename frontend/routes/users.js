@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
    fetch('http://localhost:3000/users')
           .then(res => res.json())
           .then(response => {
-              res.render('users', { title: 'Login page' });
+              res.render('users');
               }); 
   });
           
