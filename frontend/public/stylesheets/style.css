@@ -184,7 +184,3 @@ main {
   cursor: pointer;
   padding: 0;
 }
-
-.form-control:focus {
-  box-shadow: 0 0 0 0.1rem rgba(176, 102, 102, 0.25);
-}

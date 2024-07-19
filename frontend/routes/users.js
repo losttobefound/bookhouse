@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/users', function (req, res, next) {
+router.get('/', function (req, res, next) {
       
    fetch('http://localhost:3000/users')
           .then(res => res.json())
