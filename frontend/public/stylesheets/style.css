@@ -184,3 +184,18 @@ main {
   cursor: pointer;
   padding: 0;
 }
+
+/*für Login*/
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.1rem rgba(176, 102, 102, 0.25);
+  border-color: #ccc;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.1rem rgba(165, 42, 42, 0.25);
+}
+
+.custom-input {
+  color: #bc747f;
+}
